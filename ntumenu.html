@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台大吃什麼？</title>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --background-color: #f4f7f6;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --hover-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang TC', '微軟正黑體', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            display: inline-block;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        /* 圖片容器樣式更新 */
+        .card-img-container {
+            width: 100%;
+            display: flex;
+            background-color: #eee;
+            overflow: hidden; /* 確保超出的部分被隱藏 */
+        }
+
+        /* 超連結樣式，包覆整張圖片 */
+        .menu-link {
+            display: block;
+            width: 100%;
+            height: 250px; /* 固定高度 */
+            text-decoration: none;
+            overflow: hidden;
+            position: relative;
+            cursor: zoom-in; /* 滑鼠游標顯示為放大鏡 */
+        }
+
+        /* 圖片本身樣式 */
+        .menu-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 填滿容器，可能會裁切 */
+            transition: transform 0.3s ease; /* 增加滑入縮放效果 */
+        }
+
+        /* 當滑鼠懸停在圖片超連結上時，圖片輕微放大 */
+        .menu-link:hover .menu-img {
+            transform: scale(1.05);
+        }
+
+        /* 提示文字：點擊放大 */
+        .zoom-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            pointer-events: none; /* 讓滑鼠事件穿透，不影響點擊圖片 */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-link:hover .zoom-hint {
+            opacity: 1;
+        }
+
+        /* 針對多圖的特殊處理 (胖媽) */
+        .card-img-container.multi-img .menu-link {
+            flex: 1 1 50%; /* 兩張圖各佔 50% */
+        }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .info-icon {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .info-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .info-content a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-map {
+            display: block;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white !important;
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: auto;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .btn-map:hover {
+            background-color: #357abd;
+            text-decoration: none !important;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* 手機版雙圖垂直排列 */
+        @media (max-width: 600px) {
+            .card-img-container.multi-img {
+                flex-direction: column;
+            }
+            .card-img-container.multi-img .menu-link {
+                height: 200px; /* 手機版降低高度 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🍱台大吃什麼？</h1>
+        <p>點擊菜單圖片可開啟大圖觀看</p>
+    </header>
+
+    <div class="container">
+        <!-- 第一區塊：二共便當團購品項 -->
+        <h2 class="section-title">二共便當團購品項</h2>
+        <div class="grid-layout">
+            
+            <!-- Item 1 -->
+            <div class="card">
+                <div class="card-img-container">
+                    <!-- 包覆超連結，target="_blank" 代表另開視窗 -->
+                    <a href="https://i.meee.com.tw/f118TiQ.jpg" target="_blank" class="menu-link" title="點擊查看完整菜單">
+                        <img src="https://i.meee.com.tw/f118TiQ.jpg" alt="太二食堂-烤雞腿飯" class="menu-img">
+                        <span class="zoom-hint">🔍 點擊放大</span>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">太二食堂 - 烤雞腿飯</h3>
+                    <div class="info-row">
+                        <span class="info-icon">📞</span>
+                        <span class="info-content"><a href="tel:0223030000">(02) 2303-0000</a></span>
+                    </div>
+                    <br>
+                    <a href="https://maps.app.goo.gl/nS8ietUWCCwQnSSp7" target="_blank" class="btn-map">📍 點此查看地圖</a>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="card">
+                <div class="card-img-container">
+                    <a href="https://i.meee.com.tw/B2UTKik.jpg" target="_blank" class="menu-link" title="點擊查看完整菜單">
+                        <img src="https://i.meee.com.tw/B2UTKik.jpg" alt="小李便當店-小雞飯" class="menu-img">
+                        <span class="zoom-hint">🔍 點擊放大</span>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">小李便當店 - 小雞飯</h3>
+                    <div class="info-row">
+                        <span class="info-icon">📞</span>
+                        <span class="info-content"><a href="tel:0223751923">(02) 2375-1923</a></span>
+                    </div>
+                    <br>
+                    <a href="https://maps.app.goo.gl/3LzmkDRWjYPpVNt86" target="_blank" class="btn-map">📍 點此查看地圖</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 第二區塊：台大院內 -->
+        <h2 class="section-title">台大院內</h2>
+        <div class="grid-layout">
+            
+            <!-- Item 3 -->
+            <div class="card">
+                <!-- 有兩張圖片，分別包覆超連結 -->
+                <div class="card-img-container multi-img">
+                    <a href="https://i.meee.com.tw/NtrEkDF.jpg" target="_blank" class="menu-link" title="點擊查看完整菜單 1">
+                        <img src="https://i.meee.com.tw/NtrEkDF.jpg" alt="胖媽菜單 1" class="menu-img">
+                        <span class="zoom-hint">🔍 放大 1</span>
+                    </a>
+                    <a href="https://i.meee.com.tw/eFZozK8.jpg" target="_blank" class="menu-link" title="點擊查看完整菜單 2">
+                        <img src="https://i.meee.com.tw/eFZozK8.jpg" alt="胖媽菜單 2" class="menu-img">
+                        <span class="zoom-hint">🔍 放大 2</span>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">胖媽</h3>
+                    <div class="info-row">
+                        <span class="info-icon">📞</span>
+                        <span class="info-content"><a href="tel:0223123456">(02) 2312-3456 分機 88056</a></span>
+                    </div>
+                    <br>
+                    <a href="https://maps.app.goo.gl/wmccZkMPueC2xQMd8" target="_blank" class="btn-map">📍 點此查看地圖</a>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="card">
+                <div class="card-img-container">
+                    <a href="https://i.meee.com.tw/Z2G8iwW.jpg" target="_blank" class="menu-link" title="點擊查看完整菜單">
+                        <img src="https://i.meee.com.tw/Z2G8iwW.jpg" alt="龜記" class="menu-img">
+                        <span class="zoom-hint">🔍 點擊放大</span>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">龜記 <span style="font-size: 0.9rem; color: #777; font-weight: normal;">(20260707)</span></h3>
+                    <div class="info-row">
+                        <span class="info-icon">📞</span>
+                        <span class="info-content"><a href="tel:0223952298">(02) 2395-2298 分機 8113</a></span>
+                    </div>
+                    <br>
+                    <a href="https://maps.app.goo.gl/Nsnw4dm2cGLzZ5u67" target="_blank" class="btn-map">📍 點此查看地圖</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        &copy; 圖片皆可點擊放大
+    </footer>
+
+</body>
+</html>
