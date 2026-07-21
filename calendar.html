@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台灣政府行政機關辦公日曆表</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        select {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+        
+        /* 網格佈局基本設定 */
+        #calendar-container {
+            display: grid;
+            gap: 15px;
+            max-width: 1400px;
+            margin: 0 auto;
+            /* 預設手機版：1欄 */
+            grid-template-columns: 1fr;
+        }
+
+        /* 平板直式：自動轉為 2 欄 */
+        @media (min-width: 600px) {
+            #calendar-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 平板橫式/小螢幕筆電：自動轉為 3 欄 */
+        @media (min-width: 900px) {
+            #calendar-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* 桌機版：最多 4 欄 (剛好 12 個月排成 3 行) */
+        @media (min-width: 1200px) {
+            #calendar-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* 月份表格樣式 */
+        .month-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .month-table th, .month-table td {
+            border: 1px solid #333;
+            text-align: center;
+            padding: 6px 2px;
+            font-size: 14px;
+        }
+        .month-header {
+            background-color: #eee;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .day-header {
+            background-color: #f9f9f9;
+        }
+        
+        /* 日期樣式 */
+        .date-cell {
+            height: 30px;
+            vertical-align: middle;
+        }
+        .empty-cell {
+            background-color: #fafafa;
+        }
+        
+        /* 顏色標記：紅(星期日)、藍(星期六)、粉紅(國定假日)、白(工作日) */
+        .is-red {
+            background-color: #e53935; /* 紅底 */
+            color: white;
+            font-weight: bold;
+        }
+        .is-blue {
+            background-color: #1e3a8a; /* 藍底 */
+            color: white;
+            font-weight: bold;
+        }
+        .is-pink {
+            background-color: #ff99cc; /* 粉紅底 */
+            color: #000;
+            font-weight: bold;
+        }
+        .is-workday {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        /* 底部統計樣式 */
+        .summary-row {
+            font-weight: bold;
+            background-color: #f4f4f4;
+        }
+        .summary-label {
+            text-align: right;
+            padding-right: 5px;
+        }
+
+        /* 頁尾標註樣式 */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #718096;
+            font-size: 0.95rem;
+            margin-top: 2rem;
+            line-height: 1.6;
+        }
+        footer a, footer a:visited {
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="page-title">台灣政府行政機關辦公日曆表</h1>
+    <div class="controls">
+        <label for="year-select">選擇年份：</label>
+        <select id="year-select"></select>
+    </div>
+
+    <!-- 註解區塊開始 -->
+    <div style="text-align: center; margin-bottom: 20px; font-weight: bold;">
+    <span style="color: #1e3a8a;">藍底</span>：<span style="color: #1e3a8a;">休息日</span> || <span style="color: #e53935;">紅底</span>：<span style="color: #e53935;">例假日</span> || <span style="color: #ff4da6;">粉紅底</span>：<span style="color: #ff4da6;">國定假日</span>、<span style="color: #ff4da6;">補假</span>
+    </div>
+    <!-- 註解區塊結束 -->
+
+    <div id="calendar-container">
+        <!-- 月份表格會由 JavaScript 動態生成置入於此 -->
+    </div>
+
+    <footer>
+        資料來源：串接自 @ruyut 提供的官方台灣行事曆 API，感謝 <a href="https://github.com/ruyut/TaiwanCalendar" target="_blank">@ruyut</a><br>
+        by <a href="https://www.youtube.com/@GrandpaCan" target="_blank">我阿公都會</a>
+    </footer>
+
+    <script>
+        // 初始化選項與當年日曆
+        const currentYear = new Date().getFullYear();
+        const yearSelect = document.getElementById('year-select');
+        
+        for (let y = currentYear - 2; y <= currentYear + 1; y++) {
+            const option = document.createElement('option');
+            option.value = y;
+            option.textContent = y + ' 年';
+            if (y === currentYear) option.selected = true;
+            yearSelect.appendChild(option);
+        }
+
+        yearSelect.addEventListener('change', (e) => {
+            renderYearCalendar(e.target.value);
+        });
+
+        // 初始渲染
+        renderYearCalendar(currentYear);
+
+        async function renderYearCalendar(year) {
+            document.getElementById('page-title').textContent = `${year}年 台灣政府行政機關辦公日曆表`;
+            const container = document.getElementById('calendar-container');
+            container.innerHTML = '讀取官方資料中...';
+
+            try {
+                // 串接社群維護的官方行事曆 API (CDN)
+                const response = await fetch(`https://cdn.jsdelivr.net/gh/ruyut/TaiwanCalendar/data/${year}.json`);
+                
+                if (!response.ok) throw new Error('無法取得該年度資料');
+                
+                const data = await response.json();
+                
+                // 將陣列轉為以 YYYYMMDD 為 Key 的 Hash Map
+                const daysMap = {};
+                data.forEach(day => {
+                    daysMap[day.date] = day;
+                });
+
+                container.innerHTML = ''; 
+                
+                for (let month = 1; month <= 12; month++) {
+                    const monthTable = buildMonthTable(year, month, daysMap);
+                    container.appendChild(monthTable);
+                }
+
+            } catch (error) {
+                console.error(error);
+                container.innerHTML = `<div style="color:red; text-align:center;">資料載入失敗，可能該年度官方資料尚未公佈或網路異常。<br>(${error.message})</div>`;
+            }
+        }
+
+        function buildMonthTable(year, month, daysMap) {
+            const table = document.createElement('table');
+            table.className = 'month-table';
+            
+            let html = `
+                <tr>
+                    <td colspan="7" class="month-header">${year}年 ${month}月</td>
+                </tr>
+                <tr class="day-header">
+                    <td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td>
+                </tr>
+            `;
+
+            const firstDay = new Date(year, month - 1, 1);
+            const startDayOfWeek = firstDay.getDay(); 
+            const daysInMonth = new Date(year, month, 0).getDate();
+
+            let currentDay = 1;
+            let holidayCount = 0;
+            let workdayCount = 0;
+
+            for (let week = 0; week < 6; week++) {
+                html += '<tr>';
+                for (let dow = 0; dow < 7; dow++) {
+                    if (week === 0 && dow < startDayOfWeek) {
+                        html += '<td class="empty-cell"></td>';
+                    } else if (currentDay > daysInMonth) {
+                        html += '<td class="empty-cell"></td>';
+                    } else {
+                        const dateStr = `${year}${String(month).padStart(2, '0')}${String(currentDay).padStart(2, '0')}`;
+                        const dayData = daysMap[dateStr];
+                        
+                        let isHoliday = false;
+                        let titleText = '';
+                        let onclickEvent = '';
+                        let cellClass = 'is-workday';
+
+                        if (dayData) {
+                            isHoliday = dayData.isHoliday;
+                            
+                            // 浮動提示文字
+                            if (dayData.description) {
+                                titleText = `title="${dayData.description}"`;
+                                onclickEvent = `onclick="alert('${dayData.description}')"`;
+                            }
+                            
+                            if (isHoliday) {
+                                // 判斷顏色邏輯：
+                                // 1. 有 description 代表是節慶假日或補假 -> 粉紅底
+                                // 2. 否則是一般週末，星期六 -> 藍底
+                                // 3. 星期日 -> 紅底
+                                if (dayData.description && dayData.description.trim() !== '') {
+                                    cellClass = 'is-pink';
+                                } else if (dow === 6) {
+                                    cellClass = 'is-blue';
+                                } else {
+                                    cellClass = 'is-red';
+                                }
+                            } else {
+                                cellClass = 'is-workday';
+                            }
+                        } else {
+                            // 萬一缺漏資料，預設六日為假
+                            isHoliday = (dow === 0 || dow === 6);
+                            if (isHoliday) {
+                                cellClass = (dow === 6) ? 'is-blue' : 'is-red';
+                            } else {
+                                cellClass = 'is-workday';
+                            }
+                        }
+
+                        if (isHoliday) {
+                            holidayCount++;
+                        } else {
+                            workdayCount++;
+                        }
+
+                        html += `<td class="date-cell ${cellClass}" ${titleText} ${onclickEvent}>${currentDay}</td>`;
+                        currentDay++;
+                    }
+                }
+                html += '</tr>';
+                if (currentDay > daysInMonth) break;
+            }
+
+            html += `
+                <tr class="summary-row">
+                    <td colspan="2" class="summary-label">休假日</td>
+                    <td colspan="1">${holidayCount}</td>
+                    <td colspan="2" class="summary-label">工作日</td>
+                    <td colspan="2">${workdayCount}</td>
+                </tr>
+            `;
+
+            table.innerHTML = html;
+            return table;
+        }
+    </script>
+</body>
+</html>
