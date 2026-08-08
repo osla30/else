@@ -214,8 +214,8 @@
 
     <script>
         function copyBankInfo() {
-            // 取得銀行帳號文字
-            const bankText = document.getElementById("bank-info").innerText;
+            // 取得銀行帳號文字，並使用正則表達式去除所有的 "-" 以及前後空白
+            const bankText = document.getElementById("bank-info").innerText.replace(/-/g, '').trim();
             
             // 複製到剪貼簿
             navigator.clipboard.writeText(bankText).then(() => {
