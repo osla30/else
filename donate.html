@@ -4,30 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>贊助與支持</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-color: #2c3e50;
+            --primary-color: #1B2A4A; 
             --accent-color: #3498db;
             --accent-hover: #2980b9;
-            --bg-color: #f8f9fa;
+            --bg-color: #F7F1E4;
             --card-bg: #ffffff;
             --text-color: #333333;
             --text-muted: #6c757d;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            
+            background:
+              radial-gradient(circle at 15% 10%, rgba(184,146,63,0.08), transparent 40%),
+              radial-gradient(circle at 85% 90%, rgba(166,51,42,0.06), transparent 45%),
+              var(--bg-color);
+              
             color: var(--text-color);
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.035;
+            background-image:
+              repeating-linear-gradient(0deg, #000 0px, transparent 1px, transparent 3px),
+              repeating-linear-gradient(90deg, #000 0px, transparent 1px, transparent 3px);
+            z-index: 0;
         }
 
         .container {
             max-width: 900px;
             margin: 40px auto;
             padding: 20px;
+            position: relative;
         }
 
         .header {
@@ -36,9 +59,12 @@
         }
 
         .header h1 {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 900;
             color: var(--primary-color);
             font-size: 2.5em;
             margin-bottom: 10px;
+            letter-spacing: 0.05em;
         }
 
         .header p {
@@ -61,6 +87,8 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             text-align: center;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            z-index: 1;
         }
 
         .donate-card:hover {
@@ -69,6 +97,8 @@
         }
 
         .donate-card h3 {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 700;
             color: var(--primary-color);
             margin-top: 0;
             font-size: 1.3em;
@@ -76,7 +106,7 @@
             padding-bottom: 15px;
             margin-bottom: 20px;
         }
-
+        
         .qr-image {
             width: 200px;
             height: 200px;
@@ -136,7 +166,6 @@
             font-size: 1.0em;
         }
 
-        /* 複製成功的提示訊息 */
         .toast {
             visibility: hidden;
             min-width: 200px;
@@ -146,7 +175,7 @@
             border-radius: 8px;
             padding: 12px;
             position: fixed;
-            z-index: 1;
+            z-index: 10;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
@@ -162,7 +191,6 @@
     </style>
 </head>
 <body>
-
     <div class="container">
         <div class="header">
             <h1>贊助與支持</h1>
@@ -233,6 +261,5 @@
             });
         }
     </script>
-
 </body>
 </html>
