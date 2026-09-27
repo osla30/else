@@ -184,6 +184,34 @@
             opacity: 1;
             bottom: 50px;
         }
+        /* 作者連結樣式設定 */
+        .footer a.author-link, .footer a.author-link:visited {
+            color: inherit; 
+            text-decoration: none; 
+            font-weight: normal; 
+        }
+        
+        .footer a.author-link:hover {
+            text-decoration: underline; 
+        }
+
+        /* 在"我阿公都會"前面加上小小 YouTube LOGO */
+        .footer a.author-link::before {
+            content: ""; 
+            display: inline-block; 
+            width: 20px; 
+            height: 20px; 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF0000' d='M21.582 6.186a2.684 2.684 0 0 0-1.884-1.884C18.04 3.84 12 3.84 12 3.84s-6.04 0-7.698.462a2.684 2.684 0 0 0-1.884 1.884C1.956 7.844 1.956 12 1.956 12s0 4.156.462 5.814a2.684 2.684 0 0 0 1.884 1.884C6.04 20.16 12 20.16 12 20.16s6.04 0 7.698-.462a2.684 2.684 0 0 0 1.884-1.884C22.044 16.156 22.044 12 22.044 12s0-4.156-.462-5.814z'/%3E%3Cpath fill='%23FFFFFF' d='M9.91 15.488V8.512L15.96 12z'/%3E%3C/svg%3E");
+            background-size: contain; 
+            background-repeat: no-repeat; 
+            vertical-align: middle; 
+            margin-right: 5px; 
+        }
+        
+        /* 當滑鼠懸停在連結上時，不希望 LOGO 有下劃線 */
+        .footer a.author-link:hover::before {
+            text-decoration: none; 
+        }
     </style>
 </head>
 <body>
@@ -229,7 +257,7 @@
         </div>
 
         <div class="footer">
-            <p>by 我阿公都會</p>
+            <p>by <a href="https://www.youtube.com/@GrandpaCan" target="_blank" class="author-link">我阿公都會</a></p>
         </div>
     </div>
 
