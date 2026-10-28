@@ -1,0 +1,416 @@
+{
+  "generator": {
+    "name": "造島工坊 IsleForge",
+    "version": 1,
+    "createdAt": "2026-10-29"
+  },
+  "site": {
+    "title": "科科實驗島",
+    "slug": "bioisle",
+    "tagline": "一座島解決生醫實驗問題，跟著阿公把實驗玩明白",
+    "author": "我阿公都會",
+    "contact": "https://www.facebook.com/BioGrandpaCan",
+    "toolboxUrl": "https://osla30.github.io/bio/toolbox",
+    "audience": "大專學生",
+    "language": "zh-TW",
+    "privacyNote": "所有工具數據皆在瀏覽器本地端分析與計算，不會上傳雲端（整理自科科工具箱公開說明）。",
+    "mascot": {
+      "name": "阿公",
+      "description": "Q版穿白色實驗衣的慈祥老人",
+      "welcomeSpeech": "嘿！歡迎來到「科科實驗島」！我是阿公。不管今天是要配 Buffer、算細胞數、跑 SDS-PAGE 還是分析 Western Blot 跟 ELISA，點一座島進去，阿公帶你一步一步把實驗算明白！"
+    }
+  },
+  "islandType": {
+    "id": "life",
+    "name": "個人品牌島",
+    "description": "把你的作品、課程、服務與生活興趣，變成一個個可以逛的地點。"
+  },
+  "extraLabel": "代表建築／物件",
+  "centerIsland": {
+    "id": "center-island",
+    "order": 0,
+    "name": "科科大島",
+    "role": "中央廣場",
+    "group": "中央廣場",
+    "intro": "中央廣場：網站主人的自我介紹、聯絡方式，以及前往各地點的總覽。",
+    "extra": "中央生醫實驗主塔＋阿公雕像噴泉廣場＋三大分區跨海大橋（示意）",
+    "extraSimulated": true,
+    "bioSummary": "「我阿公都會」致力於把繁瑣的生物醫學實驗計算變得簡單直覺！我們為大專學生與實驗室夥伴打造了一系列免安裝、純瀏覽器本地運算的生醫實驗工具，涵蓋基礎配藥、細胞培養、SDS-PAGE 鑄膠、蛋白質定量到 Western Blot 與 ELISA 分析，讓你不再因為算錯濃度而重做實驗！（示意）",
+    "bioSimulated": true,
+    "webSummary": "整理自「科科工具箱（BioToolBox）」公開首頁：提供基礎計算、蛋白質電泳、蛋白質分析等線上工具，所有數據皆在瀏覽器端分析與計算，不會上傳雲端。",
+    "sourceUrl": "https://osla30.github.io/bio/toolbox",
+    "fetchedAt": "2026-10-29",
+    "points": [
+      "三大實驗群島分區：基礎計算（4 島）、蛋白質電泳（3 島）、蛋白質分析（4 島）",
+      "純前端本地運算：所有實驗數據皆於瀏覽器直接計算，保障實驗數據隱私",
+      "一鍵直達工具（示意）：點擊島嶼地標即可查看配方重點並開啟對應線上計算器"
+    ],
+    "grandpaTip": "第一次來嗎？可以先從畫面下方的分類按鈕挑選你今天要做的實驗，或是拖曳旋轉 3D 群島直接點選地標喔！（示意）",
+    "links": [
+      {
+        "label": "我阿公都會 Facebook 粉專",
+        "url": "https://www.facebook.com/BioGrandpaCan",
+        "primary": true
+      },
+      {
+        "label": "開啟「科科工具箱」總覽頁",
+        "url": "https://osla30.github.io/bio/toolbox",
+        "primary": false
+      }
+    ]
+  },
+  "islands": [
+    {
+      "order": 1,
+      "id": "island-01",
+      "name": "科科計算器",
+      "group": "基礎計算",
+      "intro": "各類科學計算",
+      "extra": "巨型科學計算機實驗屋＋刻度量筒塔與微量吸管（示意）",
+      "extraSimulated": true,
+      "webSummary": "整合生醫實驗常用計算功能，包含莫耳濃度換算、溶液稀釋、酸鹼計算、普通與批量動物投藥計算、Primer 回溶與稀釋，以及血球計數盤細胞計數、凍存與多組細胞混合液體積計算。",
+      "sourceUrl": "https://osla30.github.io/bio/biocalculate",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "各類科學計算：莫耳濃度、稀釋、酸鹼、動物投藥、細胞計數等",
+        "支援 Primer 回溶與稀釋、普通與批量動物投藥劑量換算（整理自工具頁）",
+        "內建白血球（細胞）計數、細胞稀釋、細胞凍存液添加與多組混合液準備試算（整理自工具頁）",
+        "適用情境（示意）：日常配製 Stock solution、繼代細胞計數與動物實驗給藥前快速驗算"
+      ],
+      "grandpaTip": "配藥跟稀釋最怕單位換錯（mM 變 μM 差一千倍！），用科科計算器先驗算一遍最安心！（示意）",
+      "link": "https://osla30.github.io/bio/biocalculate",
+      "secondaryLinks": [],
+      "position": { "x": -34, "z": -18 },
+      "landmarkType": "calculator"
+    },
+    {
+      "order": 2,
+      "id": "island-02",
+      "name": "常用化學藥品分子量查詢/計算",
+      "group": "基礎計算",
+      "intro": "常用化學藥品分子量查詢/計算",
+      "extra": "六角苯環分子結構塔＋琥珀色化學試劑藥瓶倉庫（示意）",
+      "extraSimulated": true,
+      "webSummary": "提供實驗室常用化學藥品之分子量（MW）快速檢索，並內建分子量計算器，可輸入化學式即時算出總分子量並協助配藥換算。",
+      "sourceUrl": "https://osla30.github.io/bio/mwtool",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "常用化學藥品分子量查詢/計算",
+        "內建常用化學藥品查詢表與自訂化學式分子量計算器（整理自工具頁）",
+        "快速查詢生醫緩衝液常見藥品（如 Tris、NaCl、EDTA、SDS、結晶水合物等）分子量（示意）",
+        "適用情境（示意）：站在天平前準備秤藥配 Buffer，不用再翻藥罐標籤找 MW"
+      ],
+      "grandpaTip": "秤藥時記得確認藥罐上是無水物（Anhydrous）還是含結晶水（例如二水、七水），分子量會不一樣喔！（示意）",
+      "link": "https://osla30.github.io/bio/mwtool",
+      "secondaryLinks": [],
+      "position": { "x": -52, "z": 4 },
+      "landmarkType": "molecule"
+    },
+    {
+      "order": 3,
+      "id": "island-03",
+      "name": "細胞培養實用數據",
+      "group": "基礎計算",
+      "intro": "細胞培養數量、容器數據",
+      "extra": "CO₂ 恆溫細胞培養箱建築＋粉紅培養液 T-75 培養瓶與多孔盤地標（示意）",
+      "extraSimulated": true,
+      "webSummary": "彙整各尺寸細胞培養皿（Dish）、多孔盤（Multi-well plate）與培養瓶（Flask）之實用數據，包含培養面積、建議培養液體積與細胞數量參考值。",
+      "sourceUrl": "https://osla30.github.io/bio/cellnumber",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "細胞培養數量、容器數據",
+        "涵蓋各尺寸培養皿、多孔盤與培養瓶之細胞培養實用數據（整理自工具頁）",
+        "快速對照底面積（cm²）、建議培養基工作體積、Seeding 接種細胞數與長滿（Confluent）細胞數（示意）",
+        "適用情境（示意）：從 T-75 Flask 分盤種到 6-well 或 96-well 時，快速換算每孔應種幾顆細胞"
+      ],
+      "grandpaTip": "換不同大小的培養盤時，記得照「底面積比例」來換算細胞數，才不會種太密或太稀！（示意）",
+      "link": "https://osla30.github.io/bio/cellnumber",
+      "secondaryLinks": [],
+      "position": { "x": -44, "z": 32 },
+      "landmarkType": "incubator"
+    },
+    {
+      "order": 4,
+      "id": "island-04",
+      "name": "學術科研配色",
+      "group": "基礎計算",
+      "intro": "各種學術科研配色方案",
+      "extra": "三原色稜鏡天文台＋期刊圖表調色盤花園與色票柱（示意）",
+      "extraSimulated": true,
+      "webSummary": "提供科學論文圖表與簡報專用配色方案，涵蓋長條圖、甜甜圈圖、散佈相關性圖、折線與面積圖、雷達圖等科研圖表預覽，以及配色與漸層配色資源。",
+      "sourceUrl": "https://osla30.github.io/bio/color",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "各種學術科研配色方案",
+        "支援長條圖、甜甜圈圖、散佈相關性圖、折線與面積圖、雷達圖即時配色預覽（整理自工具頁）",
+        "整合科學論文與簡報常用色票組合，一鍵複製色碼套用至 GraphPad Prism 或 R / Python（示意）",
+        "適用情境（示意）：撰寫論文、製作 Lab Meeting 簡報與海報時，讓實驗數據圖表更具期刊專業質感"
+      ],
+      "grandpaTip": "做論文圖表時，Control 組用沉穩灰或冷色、處理組用重點強調色，審查委員一眼就能看懂重點！（示意）",
+      "link": "https://osla30.github.io/bio/color",
+      "secondaryLinks": [],
+      "position": { "x": -18, "z": 46 },
+      "landmarkType": "palette"
+    },
+    {
+      "order": 5,
+      "id": "island-05",
+      "name": "經典SDS-PAGE 鑄膠計算",
+      "group": "蛋白質電泳",
+      "intro": "傳統經典 鑄膠計算 (SDS-PAGE用)",
+      "extra": "傳統垂直電泳鑄膠台＋雙層玻璃片（上膠／下膠分層）與電泳梳地標（示意）",
+      "extraSimulated": true,
+      "webSummary": "專為傳統經典配方 SDS-PAGE 設計之鑄膠計算器，適用傳統 4X 上膠 Buffer（0.5M Tris, pH6.8）、4X 下膠 Buffer（1.5M Tris, pH8.8）與 10% SDS 系統。",
+      "sourceUrl": "https://osla30.github.io/bio/classicpagecalculate",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "傳統經典 鑄膠計算 (SDS-PAGE用)",
+        "適用傳統 4X 上下膠 Buffer：",
+        "4X 上膠 Buffer (0.5M Tris, pH6.8)",
+        "4X 下膠 Buffer (1.5M Tris, pH8.8)",
+        "10% SDS",
+        "適用情境（示意）：依目標膠體百分比（如 8%、10%、12%、15%）與片數，自動計算水、Acrylamide、Buffer、10% APS 與 TEMED 體積"
+      ],
+      "grandpaTip": "APS 跟 TEMED 要在準備灌膠前最後一刻才加喔！加下去搖勻就要趕快灌，不然在離心管裡就凝膠啦！（示意）",
+      "link": "https://osla30.github.io/bio/classicpagecalculate",
+      "secondaryLinks": [],
+      "position": { "x": 14, "z": 48 },
+      "landmarkType": "classicGel"
+    },
+    {
+      "order": 6,
+      "id": "island-06",
+      "name": "Bio-Rad TGX 鑄膠計算",
+      "group": "蛋白質電泳",
+      "intro": "Bio-Rad TGX 鑄膠計算 (SDS-PAGE用)",
+      "extra": "綠色系快速鑄膠站＋閃電計時器塔與雙瓶試劑組地標（示意）",
+      "extraSimulated": true,
+      "webSummary": "針對 Bio-Rad TGX FastCast 快速凝膠試劑組設計之 SDS-PAGE 鑄膠計算器，快速換算 Resolver 與 Stacker A/B 溶液及催化劑所需體積。",
+      "sourceUrl": "https://osla30.github.io/bio/tgxcalculate",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "Bio-Rad TGX 鑄膠計算 (SDS-PAGE用)",
+        "Bio-Rad TGX 快速凝膠試劑組-介紹：",
+        "https://www.genmall.com.tw/products/tgx-fastcast-acrylamide-kit",
+        "適用情境（示意）：使用 TGX FastCast Kit 時，依膠片厚度與片數快速算出下膠與上膠 A/B 混合體積，免等待傳統壓膠時間"
+      ],
+      "grandpaTip": "TGX 快速膠凝得很快，下膠灌完可以直接接著灌上膠，照著計算器算好的體積配準沒錯！（示意）",
+      "link": "https://osla30.github.io/bio/tgxcalculate",
+      "secondaryLinks": [
+        {
+          "label": "Bio-Rad TGX 快速凝膠試劑組介紹",
+          "url": "https://www.genmall.com.tw/products/tgx-fastcast-acrylamide-kit"
+        }
+      ],
+      "position": { "x": 42, "z": 34 },
+      "landmarkType": "tgxGel"
+    },
+    {
+      "order": 7,
+      "id": "island-07",
+      "name": "TGOne 鑄膠計算",
+      "group": "蛋白質電泳",
+      "intro": "TGOne Buffer 鑄膠計算 (SDS-PAGE用)",
+      "extra": "雙倍速 2X 緩衝液儲槽塔＋水藍色凝膠實驗室與雙管路地標（示意）",
+      "extraSimulated": true,
+      "webSummary": "適用於仿 Bio-Rad TGX 快速凝膠試劑之 2X TGOne Buffer 鑄膠計算，同時相容傳統 2X 上膠 Buffer（0.25M Tris, 0.2% SDS, pH6.8）與 2X 下膠 Buffer（0.75M Tris, 0.2% SDS, pH8.8）。",
+      "sourceUrl": "https://osla30.github.io/bio/tgonecalculate",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "仿 Bio-Rad TGX 快速凝膠試劑：",
+        "2X TGOne Buffer",
+        "也可適用傳統 2X 上下膠 Buffer：",
+        "2X 上膠 Buffer (0.25M Tris, 0.2% SDS, pH6.8)",
+        "2X 下膠 Buffer (0.75M Tris, 0.2% SDS, pH8.8)",
+        "適用情境（示意）：實驗室自行配製 2X TGOne 或 2X 傳統上下膠 Buffer 時，一鍵算出各組分精準用量"
+      ],
+      "grandpaTip": "2X Buffer 系統把 SDS 直接配在 Buffer 裡了，少加一個步驟、少一個出錯機會！（示意）",
+      "link": "https://osla30.github.io/bio/tgonecalculate",
+      "secondaryLinks": [],
+      "position": { "x": 54, "z": 6 },
+      "landmarkType": "tgoneGel"
+    },
+    {
+      "order": 8,
+      "id": "island-08",
+      "name": "BCA Working Solution 計算",
+      "group": "蛋白質分析",
+      "intro": "BCA Working Solution 體積計算",
+      "extra": "A/B 試劑雙儲槽混合塔＋紫綠色漸層錐形瓶地標（示意）",
+      "extraSimulated": true,
+      "webSummary": "計算 BCA 蛋白質定量所需 Working Solution 總體積，並內建稀釋 BSA 標準品配製表，涵蓋標準試管與微量盤流程（工作範圍 0.125–2、0.025–2 及 0.005–0.25 μg/μL）。",
+      "sourceUrl": "https://osla30.github.io/bio/wb/bcaworking",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "BCA Working Solution 體積計算",
+        "內建 BSA 標準品稀釋配製指引與三種工作濃度範圍（0.125–2、0.025–2、0.005–0.25 μg/μL）流程（整理自工具頁）",
+        "依標準品與未知樣本孔數、複孔數自動算出 Reagent A 與 Reagent B（50:1）所需配製體積（示意）",
+        "適用情境（示意）：進 96 孔盤測蛋白質濃度前，精準算出要配多少 mL 的 BCA 工作液，不浪費昂貴試劑"
+      ],
+      "grandpaTip": "配 BCA Working Solution 時記得多算 1～2 孔的 Pipette 移液耗損量，才不會加到最後一孔不夠用！（示意）",
+      "link": "https://osla30.github.io/bio/wb/bcaworking",
+      "secondaryLinks": [],
+      "position": { "x": 44, "z": -24 },
+      "landmarkType": "bcaWorking"
+    },
+    {
+      "order": 9,
+      "id": "island-09",
+      "name": "Bradford/BCA 蛋白質定量",
+      "group": "蛋白質分析",
+      "intro": "Bradford/BCA 蛋白質定量",
+      "extra": "分光比色皿觀測站＋藍色（Bradford）／紫色（BCA）檢量線階梯地標（示意）",
+      "extraSimulated": true,
+      "webSummary": "整合 Bradford 與 BCA 蛋白質定量吸光值標準曲線計算，並可直接銜接進行 Western Blot 上樣樣本配製體積計算。",
+      "sourceUrl": "https://osla30.github.io/bio/wb/proteinassay",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "蛋白質定量計算、Western Blot 樣本配製計算",
+        "輸入標準品與樣本 OD 值即可建立檢量線並自動換算各樣本蛋白質濃度（示意）",
+        "直接整合 Western Blot 樣本配製：自動算出每個樣本需取多少體積、加多少 Sample Buffer 與補水（Lysis Buffer）量（示意）",
+        "適用情境（示意）：測完 Plate Reader 拿到吸光值後，一站完成濃度換算與 WB 煮樣配製表"
+      ],
+      "grandpaTip": "算完濃度直接產出 WB 配製表超方便！煮樣本前別忘了核對每管總體積跟上樣蛋白質量（μg）喔！（示意）",
+      "link": "https://osla30.github.io/bio/wb/proteinassay",
+      "secondaryLinks": [],
+      "position": { "x": 20, "z": -44 },
+      "landmarkType": "proteinAssay"
+    },
+    {
+      "order": 10,
+      "id": "island-010",
+      "id": "island-10",
+      "name": "Western Blot 條帶標準化",
+      "group": "蛋白質分析",
+      "intro": "Western Blot 條帶標準化",
+      "extra": "轉漬膜顯影暗房＋發光蛋白質條帶（Band）高低柱狀紀念碑（示意）",
+      "extraSimulated": true,
+      "webSummary": "提供 Western Blot 條帶相對定量與標準化分析，輸入 ImageJ 等軟體測得之條帶灰度值（Densitometry），即可自動完成內參校正與組間倍數比較。",
+      "sourceUrl": "https://osla30.github.io/bio/wb/wbnormal",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "輸入條帶灰度值，即可進行相對定量與標準化分析",
+        "自動將目標蛋白（Target）除以內參蛋白（Housekeeping 如 β-actin、GAPDH）並對照 Control 組歸一化為 1（示意）",
+        "免去手動拉 Excel 公式出錯風險，快速整理多組實驗重複數據（示意）",
+        "適用情境（示意）：跑完 WB 拿到條帶強度數值後，快速算出 Fold Change 用於繪製統計圖"
+      ],
+      "grandpaTip": "做 WB 定量時，記得確認條帶沒有過曝（Saturated），在線性範圍內的灰度值算出來才準確喔！（示意）",
+      "link": "https://osla30.github.io/bio/wb/wbnormal",
+      "secondaryLinks": [],
+      "position": { "x": -10, "z": -46 },
+      "landmarkType": "wbNormal"
+    },
+    {
+      "order": 11,
+      "id": "island-11",
+      "name": "ELISA 數據分析",
+      "group": "蛋白質分析",
+      "intro": "ELISA 數據分析",
+      "extra": "96 孔盤黃金矩陣廣場＋S 型擬合曲線拱門與判讀儀高塔（示意）",
+      "extraSimulated": true,
+      "webSummary": "支援直接貼上 ELISA 96 孔盤 OD 值、自訂孔位配置與標準品濃度，並提供擬合模型選擇，自動產生標準曲線與反推計算未知樣品濃度。",
+      "sourceUrl": "https://osla30.github.io/bio/elisa/elisa",
+      "fetchedAt": "2026-10-29",
+      "points": [
+        "貼上 OD 值、指定孔位配置與標準品濃度，選擇擬合模型，即可自動產生標準曲線並換算樣品濃度",
+        "完整五步驟流程：數據匯入 → 孔位指定 → 標準品濃度 → 方法設定 → 分析結果（整理自工具頁）",
+        "支援扣除空白孔（Blank）、選擇適合之回歸／曲線擬合模型並考慮稀釋倍數回推原液濃度（示意）",
+        "適用情境（示意）：測完 96 孔盤 ELISA 後，不用再手動一格一格對孔位，貼上整盤數據立即出圖與濃度表"
+      ],
+      "grandpaTip": "ELISA 的標準曲線如果是 S 型，記得試試看四參數邏輯回歸（4PL）或合適的非線性擬合模型，高濃度跟低濃度端會更準！（示意）",
+      "link": "https://osla30.github.io/bio/elisa/elisa",
+      "secondaryLinks": [],
+      "position": { "x": -32, "z": -38 },
+      "landmarkType": "elisa"
+    }
+  ],
+  "theme": {
+    "style": "低多邊形微縮模型",
+    "font": "黑體",
+    "primary": "#2f7a6b",
+    "accent": "#d9792f",
+    "backgrounds": [
+      {
+        "id": "morning",
+        "name": "晨光",
+        "background": "#f6f0e4",
+        "default": true
+      },
+      {
+        "id": "mist",
+        "name": "海霧",
+        "background": "#dcebee",
+        "default": false
+      },
+      {
+        "id": "night",
+        "name": "夜海",
+        "background": "#16222e",
+        "default": false
+      }
+    ]
+  },
+  "webSources": [
+    {
+      "title": "科科工具箱 (BioToolBox) 總覽頁",
+      "url": "https://osla30.github.io/bio/toolbox",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "科科計算器 (BioCalculator)",
+      "url": "https://osla30.github.io/bio/biocalculate",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "常用化學藥品分子量查詢/計算工具",
+      "url": "https://osla30.github.io/bio/mwtool",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "細胞培養實用數據",
+      "url": "https://osla30.github.io/bio/cellnumber",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "學術科研配色",
+      "url": "https://osla30.github.io/bio/color",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "經典SDS-PAGE 鑄膠計算器",
+      "url": "https://osla30.github.io/bio/classicpagecalculate",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "Bio-Rad TGX 鑄膠計算器",
+      "url": "https://osla30.github.io/bio/tgxcalculate",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "TGOne 鑄膠計算器",
+      "url": "https://osla30.github.io/bio/tgonecalculate",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "BCA Working Solution 體積計算工具",
+      "url": "https://osla30.github.io/bio/wb/bcaworking",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "Bradford/BCA 蛋白質定量工具",
+      "url": "https://osla30.github.io/bio/wb/proteinassay",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "Western Blot 條帶相對定量標準化工具",
+      "url": "https://osla30.github.io/bio/wb/wbnormal",
+      "fetchedAt": "2026-10-29"
+    },
+    {
+      "title": "ELISA 數據分析工具",
+      "url": "https://osla30.github.io/bio/elisa/elisa",
+      "fetchedAt": "2026-10-29"
+    }
+  ],
+  "disclaimer": "本站為非官方整理，正確資訊以原網站為準。部分代表建築設定、阿公導覽台詞與補充應用情境標示為「示意」。"
+}

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="morning">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>科科實驗島｜一座島解決生醫實驗問題，跟著阿公把實驗玩明白</title>
+  <meta name="description" content="科科實驗島（我阿公都會）：一座島解決生醫實驗問題，跟著阿公把實驗玩明白。涵蓋基礎計算、蛋白質電泳、蛋白質分析等 11 座生醫實驗工具島。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22%232f7a6b%22/><text x=%2250%22 y=%2268%22 font-size=%2252%22 text-anchor=%22middle%22 fill=%22%23ffffff%22>🧪</text></svg>" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- WebGL Fallback Notice -->
+    <div id="webgl-fallback-banner" class="webgl-fallback-banner" role="status" aria-live="polite">
+      您的瀏覽器目前未啟用 3D WebGL 顯示，已自動為您切換為「地點清單」文字模式，您仍可完整瀏覽所有實驗島工具與內容。
+    </div>
+
+    <!-- Top Navigation & Theme Toolbar -->
+    <header class="top-bar" role="banner">
+      <div class="brand-block">
+        <button id="grandpa-home-btn" class="mascot-avatar-btn" type="button" title="點阿公打開中央島：科科大島" aria-label="打開科科大島中央廣場">
+          <!-- Q版穿白色實驗衣的慈祥老人阿公 SVG -->
+          <svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" fill="#e6f4f1" />
+            <!-- White Lab Coat -->
+            <path d="M14 58C16 46 23 42 32 42C41 42 48 46 50 58" fill="#ffffff" stroke="#2f7a6b" stroke-width="2.5" />
+            <path d="M26 42L32 52L38 42" fill="#2f7a6b" />
+            <!-- Fluffy White Hair & Ears -->
+            <circle cx="18" cy="24" r="6" fill="#ffffff" stroke="#8fa39e" stroke-width="1.8" />
+            <circle cx="46" cy="24" r="6" fill="#ffffff" stroke="#8fa39e" stroke-width="1.8" />
+            <path d="M18 20C18 12 24 9 32 9C40 9 46 12 46 20" fill="#ffffff" stroke="#8fa39e" stroke-width="1.8" />
+            <!-- Kind Face -->
+            <circle cx="32" cy="27" r="13" fill="#ffdfc4" stroke="#c68b59" stroke-width="1.8" />
+            <!-- Eyebrows -->
+            <path d="M23 21C25 19.5 27.5 19.5 29 21" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" />
+            <path d="M35 21C36.5 19.5 39 19.5 41 21" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" />
+            <!-- Round Glasses -->
+            <circle cx="26.5" cy="26" r="4.2" fill="#ffffff" fill-opacity="0.55" stroke="#2f7a6b" stroke-width="2" />
+            <circle cx="37.5" cy="26" r="4.2" fill="#ffffff" fill-opacity="0.55" stroke="#2f7a6b" stroke-width="2" />
+            <line x1="30.7" y1="26" x2="33.3" y2="26" stroke="#2f7a6b" stroke-width="2" />
+            <!-- Smiling Eyes -->
+            <circle cx="26.5" cy="26" r="1.5" fill="#182623" />
+            <circle cx="37.5" cy="26" r="1.5" fill="#182623" />
+            <!-- Mustache & Warm Smile -->
+            <path d="M24 33C26.5 31.5 30 32 32 33.5C34 32 37.5 31.5 40 33C38 35.5 34.5 35.5 32 34.2C29.5 35.5 26 35.5 24 33Z" fill="#ffffff" stroke="#8fa39e" stroke-width="1.2" />
+            <path d="M28.5 36C30 37.8 34 37.8 35.5 36" stroke="#b85d19" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+        </button>
+        <div class="brand-titles">
+          <h1 class="site-title">
+            <span id="site-title-text">科科實驗島</span>
+            <span id="site-author-text" class="site-author-badge">我阿公都會</span>
+          </h1>
+          <p id="site-tagline-text" class="site-tagline">一座島解決生醫實驗問題，跟著阿公把實驗玩明白</p>
+        </div>
+      </div>
+
+      <nav class="toolbar-group" aria-label="主要工具列">
+        <!-- 3 Theme Switcher Buttons -->
+        <div class="theme-switcher" role="group" aria-label="底色主題切換">
+          <button type="button" class="theme-btn is-active" data-theme-option="morning" aria-pressed="true" title="切換至晨光主題">
+            <span class="theme-swatch" style="background-color: #f6f0e4;"></span>
+            <span>晨光</span>
+          </button>
+          <button type="button" class="theme-btn" data-theme-option="mist" aria-pressed="false" title="切換至海霧主題">
+            <span class="theme-swatch" style="background-color: #dcebee;"></span>
+            <span>海霧</span>
+          </button>
+          <button type="button" class="theme-btn" data-theme-option="night" aria-pressed="false" title="切換至夜海主題">
+            <span class="theme-swatch" style="background-color: #16222e;"></span>
+            <span>夜海</span>
+          </button>
+        </div>
+
+        <button type="button" id="open-directory-btn" class="tool-btn" aria-haspopup="dialog" aria-expanded="false">
+          <span>📋 地點清單</span>
+        </button>
+        <button type="button" id="reset-camera-btn" class="tool-btn" title="鏡頭回到群島全景">
+          <span>🧭 回到全景</span>
+        </button>
+        <button type="button" id="reduced-motion-btn" class="tool-btn" aria-pressed="false" title="暫停動畫，保護容易暈眩的人">
+          <span>⏸️ 減少動態</span>
+        </button>
+        <button type="button" id="open-help-btn" class="tool-btn" aria-haspopup="dialog" aria-expanded="false" title="操作說明與資料來源">
+          <span>❓ 說明</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Secondary Status Bar: Real-time Clock + Daylight Switcher + Search + Progress -->
+    <div class="status-bar" role="region" aria-label="狀態與搜尋列">
+      <div class="status-pill">
+        <span id="live-clock-text" aria-live="off">🕒 --:--:--</span>
+        <span aria-hidden="true">|</span>
+        <div class="daylight-switcher" role="group" aria-label="晝夜光線切換">
+          <button type="button" class="daylight-btn is-active" data-light-option="day" aria-pressed="true">☀️ 白天</button>
+          <button type="button" class="daylight-btn" data-light-option="dusk" aria-pressed="false">🌇 黃昏</button>
+          <button type="button" class="daylight-btn" data-light-option="night" aria-pressed="false">🌙 夜晚</button>
+        </div>
+        <span aria-hidden="true">|</span>
+        <span id="progress-counter-text" title="已探索島嶼數">🚩 已逛 0 / 12</span>
+        <button type="button" id="reset-progress-btn" class="daylight-btn" title="重置已逛過的島嶼紀錄" style="text-decoration: underline;">重置</button>
+      </div>
+
+      <div class="search-bar-wrap">
+        <label for="island-search-input" style="font-weight: 700;">🔍 搜尋：</label>
+        <div class="search-input-group">
+          <input
+            type="search"
+            id="island-search-input"
+            class="search-input"
+            placeholder="搜島名、SDS-PAGE、ELISA..."
+            aria-label="用關鍵字找島嶼與內容"
+            autocomplete="off"
+          />
+          <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="清除搜尋關鍵字">✕</button>
+        </div>
+        <span id="search-match-count" style="font-size: 0.78rem; color: var(--muted);"></span>
+      </div>
+    </div>
+
+    <!-- 3D Archipelago Canvas Container -->
+    <main id="canvas-container" aria-label="科科實驗島 3D 群島互動地圖">
+      <!-- Three.js WebGLRenderer Canvas injected here -->
+    </main>
+
+    <!-- SVG Leader Lines for Non-overlapping 2D Labels -->
+    <svg id="labels-svg-layer" aria-hidden="true"></svg>
+
+    <!-- 2D Floating Island HTML Labels -->
+    <div id="labels-container" role="region" aria-label="島嶼地標標籤"></div>
+
+    <!-- Mascot Grandpa Welcome Toast -->
+    <aside id="grandpa-toast" class="grandpa-toast" aria-label="阿公導覽提示">
+      <div style="flex-shrink: 0; font-size: 1.5rem;" aria-hidden="true">🥼</div>
+      <p id="grandpa-toast-message" class="grandpa-toast-text">
+        <strong>阿公：</strong>歡迎來到<strong>科科實驗島</strong>！拖曳可旋轉群島、滾輪可縮放，點擊任一座島的標籤或建築就能看實驗工具重點喔！
+      </p>
+      <button type="button" id="grandpa-toast-close" class="grandpa-toast-close" aria-label="關閉阿公提示">✕</button>
+    </aside>
+
+    <!-- Island Content Side Panel (Desktop) / Bottom Drawer (Mobile) -->
+    <aside
+      id="detail-panel"
+      class="detail-panel"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="panel-title"
+      aria-hidden="true"
+    >
+      <div class="panel-header">
+        <div>
+          <div id="panel-badges" class="panel-badges"></div>
+          <h2 id="panel-title" class="panel-title">科科大島</h2>
+        </div>
+        <button type="button" id="panel-close-btn" class="panel-close-btn" aria-label="關閉內容面板 (Esc)">✕</button>
+      </div>
+
+      <div id="panel-body" class="panel-body">
+        <!-- Populated dynamically from content.json -->
+      </div>
+
+      <div class="panel-nav-footer">
+        <button type="button" id="prev-island-btn" class="tool-btn">← 上一座島</button>
+        <button type="button" id="panel-overview-btn" class="tool-btn">🧭 回到全景</button>
+        <button type="button" id="next-island-btn" class="tool-btn">下一座島 →</button>
+      </div>
+    </aside>
+
+    <!-- Full Accessible Directory Modal (地點清單) -->
+    <div
+      id="directory-overlay"
+      class="directory-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="directory-title"
+      aria-hidden="true"
+    >
+      <div class="directory-modal">
+        <div class="directory-header">
+          <div>
+            <h2 id="directory-title" style="margin: 0; font-size: 1.3rem;">📋 科科實驗島｜全島地點清單</h2>
+            <p style="margin: 2px 0 0; font-size: 0.85rem; color: var(--muted);">
+              不用操作 3D 也能讀完所有島嶼內容、分類篩選與開啟線上實驗工具
+            </p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button type="button" id="dir-reset-progress-btn" class="tool-btn" title="重置所有已逛紀錄">🔄 重置進度</button>
+            <button type="button" id="close-directory-btn" class="panel-close-btn" aria-label="關閉地點清單 (Esc)">✕</button>
+          </div>
+        </div>
+
+        <div class="directory-controls">
+          <div id="directory-category-tabs" class="category-tabs" role="tablist" aria-label="島嶼分類篩選">
+            <!-- Populated dynamically with counts -->
+          </div>
+          <div class="search-input-group">
+            <input
+              type="search"
+              id="directory-search-input"
+              class="search-input"
+              placeholder="在清單中搜尋關鍵字..."
+              aria-label="在清單中搜尋島嶼與內容"
+            />
+          </div>
+        </div>
+
+        <div class="directory-body">
+          <div id="directory-grid" class="directory-grid">
+            <!-- Populated dynamically -->
+          </div>
+
+          <!-- Mandatory Data Sources & Non-Official Disclaimer Footer -->
+          <footer id="directory-sources-footer" class="site-sources-footer">
+            <!-- Populated dynamically from content.json webSources -->
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help & Data Sources Modal (說明 ?) -->
+    <div
+      id="help-overlay"
+      class="directory-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="help-title"
+      aria-hidden="true"
+    >
+      <div class="directory-modal help-modal">
+        <div class="directory-header">
+          <h2 id="help-title" style="margin: 0; font-size: 1.25rem;">❓ 科科實驗島｜操作說明與資料來源</h2>
+          <button type="button" id="close-help-btn" class="panel-close-btn" aria-label="關閉說明視窗 (Esc)">✕</button>
+        </div>
+        <div class="directory-body">
+          <div class="grandpa-tip-box" style="margin-bottom: 16px;">
+            <div style="font-size: 1.6rem;" aria-hidden="true">🥼</div>
+            <div class="grandpa-tip-content">
+              <strong>阿公的導覽指南</strong>
+              「科科實驗島」把<strong>我阿公都會</strong>的 11 個生醫實驗線上計算與分析工具變成一座座 3D 微縮島嶼，讓大專學生與研究夥伴能直覺找到需要的實驗幫手！
+            </div>
+          </div>
+
+          <div class="help-grid">
+            <div class="help-item">
+              <strong>🖱️ 旋轉與縮放 3D 群島</strong>
+              桌機按住滑鼠左鍵拖曳可旋轉視角、滾輪可縮放；手機單指拖曳旋轉、雙指張合縮放。
+            </div>
+            <div class="help-item">
+              <strong>🏝️ 點島看配方與開工具</strong>
+              點擊畫面上的「島嶼標籤」或「3D 建築」，鏡頭會飛近該島並打開內容面板，可一鍵新分頁開啟該計算工具。
+            </div>
+            <div class="help-item">
+              <strong>🎨 底色主題與晝夜光線</strong>
+              上方可切換「晨光、海霧、夜海」三組底色；狀態列可切換「白天、黃昏、夜晚」光線，夜晚時實驗室窗戶與路燈會亮燈！
+            </div>
+            <div class="help-item">
+              <strong>♿ 無障礙與文字清單</strong>
+              支援鍵盤 Tab 巡覽與 Esc 關閉面板；點「減少動態」可暫停所有動畫；點「地點清單」可用純文字卡片讀完所有內容。
+            </div>
+          </div>
+
+          <div id="help-sources-footer" class="site-sources-footer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
